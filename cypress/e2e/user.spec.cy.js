@@ -16,7 +16,10 @@ describe('Orange HRM Tests', () => {
     dateField: "[placeholder='yyyy-dd-mm']",
     dateCloseButton: ".--close",
     submitButton: "[type='submit']",
-
+    bloodSelec: "[tabindex='0']",
+    testFiel: "[options='']",
+    submitbuttonSecond: "[type='submit']",
+    
   }
 
   it.only(' User info Update with Success', () => {
@@ -28,17 +31,19 @@ describe('Orange HRM Tests', () => {
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(SelectorsList.dashboardGrid)
     cy.get(SelectorsList.myInfoButton).click()
-    cy.get(SelectorsList.firstNameField).type(' first Name teste')
-    cy.get(SelectorsList.lastNameField).type(' last Name teste')
+    cy.get(SelectorsList.firstNameField).type('Name')
+    cy.get(SelectorsList.lastNameField).type('Last Name')
     cy.get(SelectorsList.genericField).eq(3).clear().type('work')
     cy.get(SelectorsList.genericField).eq(4).clear().type('Other')
     cy.get(SelectorsList.genericField).eq(5).clear().type('LicenseNumber')
     cy.get(SelectorsList.genericField).eq(7).clear().type('1990-10-10')
     cy.get(SelectorsList.dateCloseButton).click()
     cy.get(SelectorsList.submitButton).eq(0).click()
-    cy.get('body').should('contain', 'successfully Updated')
+    cy.get(SelectorsList.bloodSelec).eq(2).click()
+    cy.get('.oxd-select-dropdown').should('be.visible').contains('B+').click()
+    cy.get(SelectorsList.testFiel).clear().type('Test')
+    cy.get(SelectorsList.submitbuttonSecond).eq(1).click()
     
-
   })
     it('Login with Fail', () => {
     cy.visit('/auth/login')
