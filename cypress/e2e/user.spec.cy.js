@@ -1,14 +1,13 @@
 import userData from '../fixtures/userData.json'
+import LoginPage from '../pages/loginPage.js'  
+
+const loginPage = new LoginPage()
 
 describe('Orange HRM Tests', () => {
 
   const SelectorsList = {
-    usernameField: "[name='username']",
-    passwordField: "[name='password']",
-    loginButton: "[type='submit']",
     sectionTitleTopBar: ".oxd-topbar-header-breadcrumb-module",
     dashboardGrid: ".orangehrm-dashboard-grid",
-    wrongCredentialAlert: "[role='alert']",
     myInfoButton: '[href="/web/index.php/pim/viewMyDetails"]',
     firstNameField: "[name='firstName']",
     lastNameField: "[name='lastName']",
@@ -23,8 +22,10 @@ describe('Orange HRM Tests', () => {
   }
 
   it.only(' User info Update with Success', () => {
-
-    cy.visit('/auth/login')
+    loginPage.accessLoginPage();
+    loginPage.loginWithUser(userData.valid.username, userData.valid.password);   
+   
+    /* cy.visit('/auth/login')
     cy.get(SelectorsList.usernameField).type(userData.valid.username)
     cy.get(SelectorsList.passwordField).type(userData.valid.password)
     cy.get(SelectorsList.loginButton).click()
@@ -42,8 +43,8 @@ describe('Orange HRM Tests', () => {
     cy.get(SelectorsList.bloodSelec).eq(2).click()
     cy.get('.oxd-select-dropdown').should('be.visible').contains('B+').click()
     cy.get(SelectorsList.testFiel).clear().type('Test')
-    cy.get(SelectorsList.submitbuttonSecond).eq(1).click()
-    
+    cy.get(SelectorsList.submitbuttonSecond).eq(1).click()*/
+
   })
     it('Login with Fail', () => {
     cy.visit('/auth/login')
